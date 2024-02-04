@@ -1,0 +1,90 @@
+body {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(235, 235, 235);
+  font-family: "Courier New", Courier, monospace;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  width: 350px;
+  height: 550px;
+  background-color: rgb(95, 94, 94);
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.first-layer,
+.main,
+.clear,
+.delete,
+.button {
+  border: 2px solid black;
+}
+
+.first-layer {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-right: 28px;
+  background-color: rgb(235, 235, 235);
+  width: 100%;
+  height: 100%;
+  border-radius: 7px;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.second-layer {
+  width: 100%;
+  display: flex;
+}
+
+.clear,
+.delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 50px;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.clear {
+  background-color: rgba(136, 209, 252, 0.911);
+  margin-right: 5px;
+}
+
+.delete {
+  background-color: rgba(255, 117, 117, 0.863);
+  margin-left: 5px;
+}
+
+.third-layer {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.button {
+  flex-basis: 4;
+  width: 75.8px;
+  height: 75.8px;
+  background-color: rgb(235, 235, 235);
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
