@@ -1,6 +1,7 @@
-display = document.querySelector(".first-layer");
-buttons = document.querySelector(".third-layer");
-clear = document.querySelector(".clear");
+const display = document.querySelector(".first-layer");
+const buttons = document.querySelector(".third-layer");
+const clear = document.querySelector(".clear");
+const deleter = document.querySelector(".delete");
 
 let firstNum;
 let operator;
@@ -62,7 +63,10 @@ const doCalc = (e) => {
     result = operate(firstNum, operator, secondNum);
     result = parseFloat(result);
     if (result < 9999999 && result > -9999999 && result != null) {
-      display.textContent = result.toFixed(3);
+      //   LOGIC FOR BELOW
+      //   let x = "3.000";
+      //   console.log(parseFloat(x)); --> outputs 3 as number --> toFixed() returns string w 3 decimals
+      display.textContent = parseFloat(result.toFixed(3));
       firstNum = result;
       secondNum = null;
       result = null;
@@ -82,6 +86,17 @@ const clearDisplay = () => {
   operator = null;
 };
 
+const deleteDisplay = () => {
+  if (secondNum == null) {
+    display.textContent = firstNum.slice(0, firstNum.length - 1);
+    firstNum = firstNum.slice(0, firstNum.length - 1);
+  } else if (secondNum != null) {
+    display.textContent = secondNum.slice(0, secondNum.length - 1);
+    secondNum = secondNum.slice(0, secondNum.length - 1);
+  }
+};
+
 buttons.addEventListener("click", updateDisplay);
 buttons.addEventListener("click", doCalc);
 clear.addEventListener("click", clearDisplay);
+deleter.addEventListener("click", deleteDisplay);
