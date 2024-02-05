@@ -61,9 +61,8 @@ const doCalc = (e) => {
     secondNum = parseFloat(secondNum);
     result = operate(firstNum, operator, secondNum);
     result = parseFloat(result);
-    console.log(result);
-    if (result < 9999999999 && result > -9999999999 && result != null) {
-      display.textContent = result;
+    if (result < 9999999 && result > -9999999 && result != null) {
+      display.textContent = result.toFixed(3);
       firstNum = result;
       secondNum = null;
       result = null;
