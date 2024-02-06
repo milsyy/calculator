@@ -44,7 +44,10 @@ const updateDisplay = (e) => {
     if (e.target.textContent == ".") {
       decimal = true;
     }
-  } else if (e.target.classList.contains("operator")) {
+  } else if (
+    e.target.classList.contains("operator") &&
+    !isNaN(parseFloat(firstNum))
+  ) {
     operator = e.target.textContent;
     decimal = false;
   } else if (
@@ -77,8 +80,8 @@ const doCalc = (e) => {
     (e.target.classList.contains("equal") ||
       e.key === "=" ||
       e.key === "Enter") &&
-    firstNum != null &&
-    secondNum != null
+    !isNaN(parseFloat(firstNum)) &&
+    !isNaN(parseFloat(secondNum))
   ) {
     firstNum = parseFloat(firstNum);
     secondNum = parseFloat(secondNum);
