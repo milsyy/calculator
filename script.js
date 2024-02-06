@@ -106,13 +106,22 @@ const clearDisplay = () => {
   firstNum = null;
   secondNum = null;
   operator = null;
+  decimal = false;
 };
 
 const deleteDisplay = () => {
   if (secondNum == null) {
+    if (firstNum.charAt(firstNum.length - 1) == ".") {
+      decimal = false;
+    }
+
     display.textContent = firstNum.slice(0, firstNum.length - 1);
     firstNum = firstNum.slice(0, firstNum.length - 1);
   } else if (secondNum != null) {
+    if (secondNum.charAt(secondNum.length - 1) == ".") {
+      decimal = false;
+    }
+
     display.textContent = secondNum.slice(0, secondNum.length - 1);
     secondNum = secondNum.slice(0, secondNum.length - 1);
   }
