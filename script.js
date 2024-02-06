@@ -58,11 +58,11 @@ const updateDisplay = (e) => {
 
 const doCalc = (e) => {
   if (
-    (e.target.classList.contains("equal") &&
-      firstNum != null &&
-      secondNum != null) ||
-    e.key === "=" ||
-    e.key === "Enter"
+    (e.target.classList.contains("equal") ||
+      e.key === "=" ||
+      e.key === "Enter") &&
+    firstNum != null &&
+    secondNum != null
   ) {
     firstNum = parseFloat(firstNum);
     secondNum = parseFloat(secondNum);
@@ -142,7 +142,7 @@ const numKey = (e) => {
 const operatorKey = (e) => {
   if ((e.key === "+" || e.key === "-" || e.key === "/") && firstNum != null) {
     operator = e.key;
-  } else if (e.key === "*" && firstNum != null) {
+  } else if ((e.key === "*" || e.key === "x") && firstNum != null) {
     operator = "x";
   }
 };
