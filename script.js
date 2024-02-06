@@ -141,7 +141,7 @@ const numKey = (e) => {
 
 const operatorKey = (e) => {
   if ((e.key === "+" || e.key === "-" || e.key === "/") && firstNum != null) {
-    operator = "+";
+    operator = e.key;
   } else if (e.key === "*" && firstNum != null) {
     operator = "x";
   }
