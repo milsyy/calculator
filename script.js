@@ -7,6 +7,7 @@ let firstNum;
 let operator;
 let secondNum;
 let result;
+let decimal = false;
 
 const add = (x, y) => x + y;
 const subtract = (x, y) => x - y;
@@ -29,15 +30,23 @@ const updateDisplay = (e) => {
   if (e.target.classList.contains("number") && display.textContent === "0") {
     display.textContent = e.target.textContent;
     firstNum = display.textContent;
+    if (e.target.textContent == ".") {
+      decimal = true;
+    }
   } else if (
     e.target.classList.contains("number") &&
     operator == null &&
-    display.textContent.length <= 9
+    display.textContent.length <= 9 &&
+    (decimal == false || e.target.textContent != ".")
   ) {
     display.textContent += e.target.textContent;
     firstNum += e.target.textContent;
+    if (e.target.textContent == ".") {
+      decimal = true;
+    }
   } else if (e.target.classList.contains("operator")) {
     operator = e.target.textContent;
+    decimal = false;
   } else if (
     e.target.classList.contains("number") &&
     operator != null &&
@@ -45,14 +54,21 @@ const updateDisplay = (e) => {
   ) {
     display.textContent = e.target.textContent;
     secondNum = display.textContent;
+    if (e.target.textContent == ".") {
+      decimal = true;
+    }
   } else if (
     e.target.classList.contains("number") &&
     operator != null &&
     secondNum != null &&
-    display.textContent.length <= 9
+    display.textContent.length <= 9 &&
+    (decimal == false || e.target.textContent != ".")
   ) {
     display.textContent += e.target.textContent;
     secondNum += e.target.textContent;
+    if (e.target.textContent == ".") {
+      decimal = true;
+    }
   }
 };
 
@@ -119,31 +135,47 @@ const numKey = (e) => {
     if (firstNum == null && display.textContent === "0") {
       display.textContent = e.key;
       firstNum = display.textContent;
+      if (e.key == ".") {
+        decimal = true;
+      }
     } else if (
       secondNum == null &&
       operator == null &&
-      display.textContent.length <= 9
+      display.textContent.length <= 9 &&
+      (decimal == false || e.key != ".")
     ) {
       display.textContent += e.key;
       firstNum += e.key;
+      if (e.key == ".") {
+        decimal = true;
+      }
     } else if (operator != null && secondNum == null) {
       display.textContent = e.key;
       secondNum = display.textContent;
+      if (e.key == ".") {
+        decimal = true;
+      }
     } else if (
       operator != null &&
       secondNum != null &&
-      display.textContent.length <= 9
+      display.textContent.length <= 9 &&
+      (decimal == false || e.key != ".")
     ) {
       display.textContent += e.key;
       secondNum += e.key;
+      if (e.key == ".") {
+        decimal = true;
+      }
     }
 };
 
 const operatorKey = (e) => {
   if ((e.key === "+" || e.key === "-" || e.key === "/") && firstNum != null) {
     operator = e.key;
+    decimal = false;
   } else if ((e.key === "*" || e.key === "x") && firstNum != null) {
     operator = "x";
+    decimal = false;
   }
 };
 
