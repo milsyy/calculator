@@ -57,7 +57,13 @@ const updateDisplay = (e) => {
 };
 
 const doCalc = (e) => {
-  if (e.target.classList.contains("equal")) {
+  if (
+    (e.target.classList.contains("equal") &&
+      firstNum != null &&
+      secondNum != null) ||
+    e.key === "=" ||
+    e.key === "Enter"
+  ) {
     firstNum = parseFloat(firstNum);
     secondNum = parseFloat(secondNum);
     result = operate(firstNum, operator, secondNum);
@@ -96,7 +102,68 @@ const deleteDisplay = () => {
   }
 };
 
+const numKey = (e) => {
+  if (
+    e.key == "0" ||
+    e.key == "1" ||
+    e.key == "2" ||
+    e.key == "3" ||
+    e.key == "4" ||
+    e.key == "5" ||
+    e.key == "6" ||
+    e.key == "7" ||
+    e.key == "8" ||
+    e.key == "9" ||
+    e.key == "."
+  )
+    if (firstNum == null && display.textContent === "0") {
+      display.textContent = e.key;
+      firstNum = display.textContent;
+    } else if (
+      secondNum == null &&
+      operator == null &&
+      display.textContent.length <= 9
+    ) {
+      display.textContent += e.key;
+      firstNum += e.key;
+    } else if (operator != null && secondNum == null) {
+      display.textContent = e.key;
+      secondNum = display.textContent;
+    } else if (
+      operator != null &&
+      secondNum != null &&
+      display.textContent.length <= 9
+    ) {
+      display.textContent += e.key;
+      secondNum += e.key;
+    }
+};
+
+const operatorKey = (e) => {
+  if ((e.key === "+" || e.key === "-" || e.key === "/") && firstNum != null) {
+    operator = "+";
+  } else if (e.key === "*" && firstNum != null) {
+    operator = "x";
+  }
+};
+
+const calculation = (e) => {
+  if (firstNum != null && secondNum != null && operator != null) {
+    doCalc();
+  }
+  if (e.key === "c") {
+    clearDisplay();
+  }
+  if (e.key === "Backspace") {
+    deleteDisplay();
+  }
+};
+
 buttons.addEventListener("click", updateDisplay);
 buttons.addEventListener("click", doCalc);
 clear.addEventListener("click", clearDisplay);
 deleter.addEventListener("click", deleteDisplay);
+window.addEventListener("keydown", numKey);
+window.addEventListener("keydown", operatorKey);
+window.addEventListener("keydown", calculation);
+window.addEventListener("keydown", doCalc);
